@@ -42,7 +42,7 @@ class NewProject:
         credentials = self.get_credentials()
 
         if credentials:
-            if len(credentials) == 2:
+            if len(credentials) >= 2:
                 g = Github(credentials[0], credentials[1])
                 self.user = g.get_user()
         else:
