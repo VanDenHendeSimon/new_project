@@ -28,11 +28,15 @@ class NewProject:
             exit("Failed to locate script folder.")
 
     def get_credentials(self):
-        credentials = os.path.join(self.script_folder, "credentials.txt")
-        with open(credentials, "r") as f:
-            data = [line.rstrip("\n") for line in f.readlines()]
+        try:
+            credentials = os.path.join(self.script_folder, "credentials.txt")
+            with open(credentials, "r") as f:
+                data = [line.rstrip("\n") for line in f.readlines()]
 
-        return data
+            return data
+
+        except Exception:
+            return None
 
     def login(self):
         credentials = self.get_credentials()
