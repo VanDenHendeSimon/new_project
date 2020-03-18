@@ -1,5 +1,6 @@
 from PySide2 import QtCore, QtGui, QtWidgets
 import sys
+import os
 
 
 app = QtWidgets.QApplication(sys.argv)
@@ -12,7 +13,7 @@ class GUI(QtWidgets.QWidget):
 
         self.setWindowTitle("New Project")
         self.setMinimumSize(400, 220)
-        self.setWindowIcon(QtGui.QIcon("github_logo.png"))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(self.parent.script_folder, "github_logo.png")))
         self.setFont(QtGui.QFont('Serif', 13))
 
         self.layout = QtWidgets.QVBoxLayout()

@@ -6,18 +6,30 @@ import sys
 
 class NewProject:
     def __init__(self):
+        self.script_folder = self.get_script_folder()
+
         self.user = None
         self.login()
 
         self.ui = GUI(self)
         self.ui.open()
 
-        print([repo.name for repo in self.user.get_repos()])
-
     @staticmethod
-    def get_credentials():
-        credentials_filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "credentials.txt")
-        with open(credentials_filepath, "r") as f:
+    def get_script_folder():
+        try:
+            dist_folder = next(
+                f for f in os.environ["Path"].split(";")
+                if "new_project" in f
+            )
+            # Go up one directory
+            return dist_folder[:dist_folder.rfind("\\")]
+        except Exception:
+            # Quit
+            exit("Failed to locate script folder.")
+
+    def get_credentials(self):
+        credentials = os.path.join(self.script_folder, "credentials.txt")
+        with open(credentials, "r") as f:
             data = [line.rstrip("\n") for line in f.readlines()]
 
         return data
@@ -25,9 +37,12 @@ class NewProject:
     def login(self):
         credentials = self.get_credentials()
 
-        if len(credentials) == 2:
-            g = Github(credentials[0], credentials[1])
-            self.user = g.get_user()
+        if credentials:
+            if len(credentials) == 2:
+                g = Github(credentials[0], credentials[1])
+                self.user = g.get_user()
+        else:
+            print("Failed to fetch credentials")
 
     def create_repo(self, name, description, private):
         repo = self.user.create_repo(
@@ -37,11 +52,10 @@ class NewProject:
             auto_init=True
         )
 
-        print("Get path from execution location (. after call)")
-        print(repo.html_url)
-        print(sys.argv)
-        # os.system("cd %s" % sys.argv[1])
-        # os.system("git clone %s" % repo.html_url)
+        # Cloning repo
+        os.system("d:")
+        os.system("cd %s" % os.path.basename(os.path.abspath(__file__)))
+        os.system("git clone %s" % repo.html_url)
 
 
 if __name__ == '__main__':
