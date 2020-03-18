@@ -1,6 +1,7 @@
 from github import Github
 from GUI import GUI
 import os
+import sys
 
 
 class NewProject:
@@ -15,7 +16,8 @@ class NewProject:
 
     @staticmethod
     def get_credentials():
-        with open("creadentials.txt", "r") as f:
+        credentials_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "credentials.txt")
+        with open(credentials_filepath, "r") as f:
             data = [line.rstrip("\n") for line in f.readlines()]
 
         return data
@@ -37,6 +39,7 @@ class NewProject:
 
         print("Get path from execution location (. after call)")
         print(repo.html_url)
+        print(sys.argv)
         # os.system("cd %s" % sys.argv[1])
         # os.system("git clone %s" % repo.html_url)
 
