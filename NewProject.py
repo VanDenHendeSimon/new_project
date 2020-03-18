@@ -16,7 +16,7 @@ class NewProject:
 
     @staticmethod
     def get_credentials():
-        credentials_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "credentials.txt")
+        credentials_filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "credentials.txt")
         with open(credentials_filepath, "r") as f:
             data = [line.rstrip("\n") for line in f.readlines()]
 
