@@ -45,17 +45,20 @@ class NewProject:
             print("Failed to fetch credentials")
 
     def create_repo(self, name, description, private):
-        repo = self.user.create_repo(
-            name=name,
-            description=description,
-            private=private,
-            auto_init=True
-        )
+        try:
+            repo = self.user.create_repo(
+                name=name,
+                description=description,
+                private=private,
+                auto_init=True
+            )
 
-        # Cloning repo
-        os.system("d:")
-        os.system("cd %s" % os.path.basename(os.path.abspath(__file__)))
-        os.system("git clone %s" % repo.html_url)
+            # Cloning repo
+            os.system("git clone %s" % repo.html_url)
+            os.system("code %s" % os.path.join(os.path.dirname(os.path.abspath(__file__)), name))
+
+        except Exception as ex:
+            print(ex)
 
 
 if __name__ == '__main__':
