@@ -45,6 +45,9 @@ class NewProject:
             if len(credentials) >= 2:
                 g = Github(credentials[0], credentials[1])
                 self.user = g.get_user()
+            else:
+                print("Either username or password are missing from the credentials file")
+                print("Make sure to put the username on line 1 and the password on line 2")
         else:
             print("Failed to fetch credentials")
 
