@@ -62,7 +62,7 @@ class NewProject:
 
             # Cloning repo
             os.system("git clone %s" % repo.html_url)
-            os.system("code %s" % os.path.join(os.path.dirname(os.path.abspath(__file__)), name))
+            os.system("pycharm %s" % os.path.join(os.path.dirname(os.path.abspath(__file__)), name))
 
         except Exception as ex:
             print(ex)
