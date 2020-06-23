@@ -62,6 +62,15 @@ class NewProject:
 
             # Cloning repo
             os.system("git clone %s" % repo.html_url)
+            # Creating gitignore
+            os.system("echo .idea/ >> .gitignore")
+            # Initialising the repo
+            os.system("git add .")
+            os.system("git commit -m \"initial commit\" .")
+            os.system("git push")
+            # Closing GUI
+            self.ui.close()
+            # Launching pycharm
             os.system("pycharm %s" % os.path.join(os.path.dirname(os.path.abspath(__file__)), name))
 
         except Exception as ex:
