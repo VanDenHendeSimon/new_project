@@ -1,7 +1,8 @@
 from github import Github
 from GUI import GUI
-import os
+import time
 import sys
+import os
 
 
 class NewProject:
@@ -62,7 +63,9 @@ class NewProject:
 
             # Cloning repo
             os.system("git clone %s" % repo.html_url)
-            os.system("cd %s" % name)
+            time.sleep(1)
+            # Go into git folder
+            os.chdir(os.path.join(os.getcwd(), name))
             # Creating gitignore
             os.system("echo .idea/ >> .gitignore")
             # Initialising the repo
@@ -72,7 +75,7 @@ class NewProject:
             # Closing GUI
             self.ui.close()
             # Launching pycharm
-            os.system("pycharm %s" % os.path.join(os.path.dirname(os.path.abspath(__file__)), name))
+            os.system("pycharm .")
 
         except Exception as ex:
             print(ex)
