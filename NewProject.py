@@ -62,6 +62,7 @@ class NewProject:
 
             # Cloning repo
             os.system("git clone %s" % repo.html_url)
+            os.system("cd %s" % name)
             # Creating gitignore
             os.system("echo .idea/ >> .gitignore")
             # Initialising the repo
